@@ -1,13 +1,10 @@
 ---
 layout: page
-title: About
+title: About ME?
 sidebar_link: true
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
-</p>
-
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+*노는것 좋아함*
+*쉬는것 좋아함*
+*먹는것 좋아함*
+~~개발 좋아는 함. 잘은못함~~
