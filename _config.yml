@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            Pretty Sure
+title:            Do it!
 tagline:          'shabre''s Blog'
 description:      'welcome!'
 url:              https://github.com/shabre/shabre.github.io

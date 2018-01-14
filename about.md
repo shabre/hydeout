@@ -4,10 +4,13 @@ title: About
 sidebar_link: true
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
-</p>
+##specs
 
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+
+*노는것 좋아함*
+
+*먹는것 좋아함*
+
+*자는것 좋아함*
+
+*개발 ~~안~~좋아함 **근데잘은못함***
