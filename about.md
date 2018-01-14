@@ -4,7 +4,7 @@ title: About
 sidebar_link: true
 ---
 
-##specs
+## specs
 
 
 *노는것 좋아함*
