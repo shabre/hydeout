@@ -4,7 +4,7 @@ highlighter:      rouge
 
 # Setup
 title:            Pretty Sure
-tagline:          'shabre's Blog'
+tagline:          'shabre''s Blog'
 description:      'welcome!'
 url:              https://github.com/shabre/shabre.github.io
 baseurl:          # the optional subpath of your site, e.g. "/blog"
@@ -15,7 +15,7 @@ baseurl:          # the optional subpath of your site, e.g. "/blog"
 
 author:
   name:           'S.K Ha'
-  #url:            https://www.linkedin.com/in/shuoszhang/
+  url:            https://github.com/shabre/shabre.github.io
 
 paginate:         5
 # paginate_path:    '/page:num'
