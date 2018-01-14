@@ -5,7 +5,7 @@ highlighter:      rouge
 # Setup
 title:            Pretty Sure
 tagline:          'shabre's Blog'
-#description:      '<a href="https://www.linkedin.com/in/shuoszhang/" target="_blank">Shuo Zhang</a>''s blog.'
+description:      'welcome!'
 url:              https://github.com/shabre/shabre.github.io
 baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
