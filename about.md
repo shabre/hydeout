@@ -4,12 +4,10 @@ title: About
 sidebar_link: true
 ---
 
-1992.04.19 태어남
+<p class="message">
+  Hey there! This page is included as an example. Feel free to customize it
+  for your own use upon downloading. Carry on!
+</p>
 
-*노는것 좋아함*
-
-*쉬는것 좋아함*
-
-*먹는것 좋아함*
-
-~~개발 좋아는 함. 잘은못함~~
+To make pages show up in the sidebar, add `sidebar_link: true` to the front
+matter.

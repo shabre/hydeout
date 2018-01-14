@@ -3,10 +3,10 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            Shabre's blog
-tagline:          'A Jekyll theme'
-description:      ''
-#url:              https://fongandrew.github.io/hydeout
+title:            Pretty Sure
+tagline:          'shabre's Blog'
+#description:      '<a href="https://www.linkedin.com/in/shuoszhang/" target="_blank">Shuo Zhang</a>''s blog.'
+url:              https://github.com/shabre/shabre.github.io
 baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
                   # If you want to move just the blog index pages but keep
@@ -15,7 +15,7 @@ baseurl:          # the optional subpath of your site, e.g. "/blog"
 
 author:
   name:           'S.K Ha'
-  #url:            https://github.com/shabre
+  #url:            https://www.linkedin.com/in/shuoszhang/
 
 paginate:         5
 # paginate_path:    '/page:num'
@@ -27,13 +27,14 @@ plugins:
   - jekyll-paginate
 
 # Custom vars
+version:            3.4.1
 sidebar_home_link:  true
 # sidebar_blog_link:  '/blog'   # By default, your home page is your blog
                                 # page. If you change your paginate_path,
                                 # set this to the root of the paginate_path
                                 # to enable a separate blog link.
 github:
-  repo:             https://github.com/shabre
+  repo:             https://github.com/shabre/shabre.github.io
 
 disqus:
   shortname:        shabre

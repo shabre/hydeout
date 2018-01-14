@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-hydeout"
-  spec.version       = "3.5.3"
-  spec.authors       = ["Andrew Fong"]
-  spec.email         = ["id@andrewfong.com"]
+  spec.version       = "3.5.2"
+  spec.authors       = ["S.K Ha"]
+  spec.email         = ["shabreking92@gmail.com"]
 
-  spec.summary       = %q{The Hyde theme for Jekyll, refreshed.}
-  spec.homepage      = "https://github.com/fongandrew/hydeout"
+  spec.summary       = %q{shabre's Technology Blog.}
+  spec.homepage      = "https://github.com/shabre/shabre.github.io"
   spec.license       = "MIT"
 
   spec.metadata["plugin_type"] = "theme"

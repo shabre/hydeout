@@ -27,6 +27,12 @@ article + *, .post-body ~ section {
 .post-title a {
   color: $heading-color;
 }
+
+.post-categories,
+.post-categories a {
+  color: $category-color;
+}
+
 .page-title,
 .post-title {
   margin-top: 0;
