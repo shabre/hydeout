@@ -1,4 +1,4 @@
 ---
 layout: category
-title: performance testing
+title: Performance testing
 ---
