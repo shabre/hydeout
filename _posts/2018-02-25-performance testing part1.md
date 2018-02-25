@@ -36,3 +36,13 @@ excerpt_separator: "<!--more-->"
 - Load testing: 이 테스트는 작업 중에 발생하는 작업로드나 로드 량에 관련된 성능을 결정, 검증하는 테스팅을 말합니다.
 - Stress testing: 작업중에 예상되는 조건을 초과하는 경우 시스템, 응용 프로그램의 성능, 유효성을을 검증하는 테스트 입니다.
 
+## Chapter 2 - Types of Performance Testing
+
+성능 테스팅에는 chapter 1에서 정리한 내용과 같이 크게 performance testing, Load testing, Stress testing 에 Capacity testing 을 추가해 크게 4가지로 구성이 됩니다. 이번 chapter 에서는 성능 테스팅에 대해 좀더 자세히 정리해 보겠습니다.
+
+### Performance test
+- - -
+Performance test 의 목적은  속도, 확장성, 안정성을 검증하기 위함입니다. 시스템의 사용자가 응용 프로그램의 성능에 만족하는지 판단하는데 중점을 두고, 기대와 결과의 불일치를 확인하여 튜닝, 용량 계획 및 최적화 작업을 지원합니다.
+
+Performance test 는 전체적인 성능을 검증하는데 사용됩니다. 따라서 각각의 세부 기능별 검증은 하지 못할 수 있습니다. 또한 철저히 테스팅 모델을 디자인하거나 검증하지 않을경우
+
