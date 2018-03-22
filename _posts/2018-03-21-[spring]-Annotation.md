@@ -183,3 +183,19 @@ RequestMapping 메소드의 파라미터에서 선언할 시 쿠기값을 얻어
 }
 ```
 
+### @CrossOrigin
+Cross origin 문제를 해결해주는 어노테이션. Cross origin 이란 도메인과 다른 도메인으로부터 리소스가 요청될 경우를 말한다.
+
+- - -
+
+### @ExceptionHandler
+Controller 레벨에서 처리될 예외를 처리하도록 하는 어노테이션으로, 메소드에 선언된다. 예외 값들은 배열로도 넣을 수 있으며, ExceptionHandler와 일치하는 예외가 발생 시 view 단으로 보내서 처리가 가능하다.
+
+### @PathVariable
+PathVariable은 RequestMapping에 동적으로 들어오는 값을 파라미터로 받아서 메소드에서 처리하도록 하는 어노테이션이다.
+```java
+@RequestMapping("/main/{id}")
+public String page(@PathVariable String id){
+//logic
+}
+```
