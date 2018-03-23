@@ -199,3 +199,18 @@ public String page(@PathVariable String id){
 //logic
 }
 ```
+
+## HTTP Request / Response
+
+### @RequestAttribute
+추후 추가
+
+### @RequestBody
+HttpBody의 값을 Mapping 해준다. 만약 객체로 호출을 하면 자동으로 객체화 시켜서 반환을 해준다.
+```java
+  @PostMapping @ResponseBody
+  public LoginResponseDTO sign_in(@RequestBody UserInfoDTO userInfo) {
+    //logic
+  }
+```
+### @RequestHeader
