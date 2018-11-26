@@ -1,3 +1,12 @@
+---
+layout: post
+title: "[spring] Aop"
+categories:
+    - Development
+excerpt_separator: "<!--more-->"
+---
+
+
 # AOP
 
 ### 메소드 추출
