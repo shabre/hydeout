@@ -27,7 +27,7 @@ Plain Old Java Object 의 줄임말. 그야말로 오래된 단순 자바 객체
 
 그림으로 나타내면 대략 이렇다.
 
-![POJO_IoC]({{ site.baseurl }}/assets/chap2_1.png)
+![POJO_IoC]({{ site.baseurl }}/assets/image/chap2_1.PNG)
 
 아래는 코드이다.
 
