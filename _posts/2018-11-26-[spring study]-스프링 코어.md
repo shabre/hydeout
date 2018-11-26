@@ -1,3 +1,11 @@
+---
+layout: post
+title: "[Spring Study] 스프링 코어"
+categories:
+    - Development
+excerpt_separator: "<!--more-->"
+---
+
 # 스프링 코어
 
 ## IoC와 POJO에 관해
@@ -19,7 +27,7 @@ Plain Old Java Object 의 줄임말. 그야말로 오래된 단순 자바 객체
 
 그림으로 나타내면 대략 이렇다.
 
-![POJO_IoC](/assets/image/chap2_1.png)
+![POJO_IoC](shabre.github.io/assets/image/chap2_1.png)
 
 아래는 코드이다.
 
