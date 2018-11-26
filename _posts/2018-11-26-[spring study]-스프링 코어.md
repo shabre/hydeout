@@ -27,11 +27,11 @@ Plain Old Java Object 의 줄임말. 그야말로 오래된 단순 자바 객체
 
 그림으로 나타내면 대략 이렇다.
 
-![POJO_IoC](https://shabre.github.io/assets/image/chap2_1.png)
+![POJO_IoC]({{ site.baseurl }}/assets/image/chap2_1.png)
 
 아래는 코드이다.
 
-```JAVA
+```java
 /** 
 * POJO
 */
@@ -67,7 +67,7 @@ public class SequenceGenerator {
 }
 ```
 
-```JAVA
+```java
 /** 
 * POJO 생성을 bean으로 등록
 */
@@ -86,7 +86,7 @@ public class SequenceGeneratorConfiguration {
 }
 ```
 
-```JAVA
+```java
 /** 
 * POJO 생성을 bean으로 등록
 */
@@ -105,7 +105,7 @@ public class SequenceGeneratorConfiguration {
 }
 ```
 
-```JAVA
+```java
 public class Main {
 
     public static void main(String[] args) {
@@ -138,7 +138,7 @@ Advice 종류
 
 예제코드
 
-```JAVA
+```java
 @Component("arithmeticCalculator")
 public class ArithmeticCalculatorImpl implements ArithmeticCalculator {
     @Override
@@ -153,7 +153,7 @@ public class ArithmeticCalculatorImpl implements ArithmeticCalculator {
 }
 ```
 
-```JAVA
+```java
 @Aspect
 @Component
 public class CalculatorLoggingAspect {
@@ -167,7 +167,7 @@ public class CalculatorLoggingAspect {
 }
 ```
 
-```JAVA
+```java
 @Configuration
 @EnableAspectJAutoProxy //Aspect 검색을 가능하게 한다
 @ComponentScan
@@ -175,7 +175,7 @@ public class CalculatorConfiguration {
 }
 ```
 
-```JAVA
+```java
 public class Main {
 
     public static void main(String[] args) {
@@ -194,7 +194,7 @@ public class Main {
 
 ### Pointcut 재사용
 
-```JAVA
+```java
 
 @Aspect
 @Component
@@ -240,7 +240,7 @@ public class CalculatorLoggingAspect {
 ### @어노태이션을 이용한 Aspect
 
 1. 어노테이션 선언
-```JAVA
+```java
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -248,7 +248,7 @@ public @interface LoggingRequired {
 }
 ```
 2. Pointcut 등록
-```JAVA
+```java
 @Aspect
 public class CalculatorPointcuts {
     @Pointcut("annotation(com.apress.springrecipes.calculator.LoggingRequired)")
