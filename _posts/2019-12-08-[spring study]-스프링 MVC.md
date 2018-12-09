@@ -40,9 +40,8 @@ Another aspect is that models are more lightweight and more convenient to work w
 - - -
 ### DispatcherServlet
 
-```
-요청된 HTTP request 를 처리해주는 중앙dispatcher로, 등록된 controller/hanler로 dispatch 해주는 역할을 함.
-```
+**요청된 HTTP request 를 처리해주는 중앙dispatcher로, 등록된 controller/hanler로 dispatch 해주는 역할을 함.**
+
 #### DispatcherServlet 특징
 - Java bean configuration 매커니즘을 기초로 함.
 
@@ -110,6 +109,7 @@ public class CourtServletContainerInitializer implements ServletContainerInitial
 
 배포된 war 파일을 시동하려면 META-INF/service/javax.servlet.ServletContainerInitializer를 파일을 함께 만들어야한다. 이 작업은 스프링에서 제공하는 SpringServletContainerInitializer를 이용하면 간단하게 해결된다.
 SpringServletContainerInitializer 는 ServletContainerInitializer 의 구현체로 클래스패스에서 WebApplicationInitializer 구현체를 찾게된다. WebApplicationInitializer 구현체는 스프링에서 몇가지가 준비되어있고, AbstractAnnotationConfigDispatcherServletInitializer는 그 중 하나이다.
+
 ```java
 public class CourtApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -134,7 +134,64 @@ public class CourtApplicationInitializer extends AbstractAnnotationConfigDispatc
 핸들러 인터셉터로 서블릿 처리의 전처리, 후처리를 수행할 수 있다.
 
 ```java
+//인터셉터 등록
+@Configuration
+public class InterceptorConfiguration implements WebMvcConfigurer {
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(measurementInterceptor());
+    }
+
+    @Bean
+    public MeasurementInterceptor measurementInterceptor() {
+        return new MeasurementInterceptor();
+    }
+}
+```
+
+```java
+//인터셉터 구현체
+public class MeasurementInterceptor implements HandlerInterceptor {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler) throws Exception {
+        long startTime = System.currentTimeMillis();
+        request.setAttribute("startTime", startTime);
+        return true;
+    }
+
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        long startTime = (Long) request.getAttribute("startTime");
+        request.removeAttribute("startTime");
+        long endTime = System.currentTimeMillis();
+        modelAndView.addObject("handlingTime", endTime - startTime);
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    }
+}
+```
+
+afterCompletion은 딱히 필요가 없지만 interface의 내용을 모두 구현해야하는 점 때문에 선언을 했다. 여기서 HandlerInterceptorAdapter로 구현을 하면 필요없는 메소드 구현을 피할 수 있다.
+
+```java
+//HandlerInterceptorAdapter 구현
+public class MeasurementInterceptor extends HandlerInterceptorAdapter {
+
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        long startTime = System.currentTimeMillis();
+        request.setAttribute("startTime", startTime);
+        return true;
+    }
+
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        long startTime = (Long) request.getAttribute("startTime");
+        request.removeAttribute("startTime");
+        long endTime = System.currentTimeMillis();
+        modelAndView.addObject("handlingTime", endTime - startTime);
+    }
+}
 ```
 
 #### 참조
