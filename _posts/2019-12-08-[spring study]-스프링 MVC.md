@@ -56,16 +56,13 @@ Another aspect is that models are more lightweight and more convenient to work w
 @Configuration
 @ComponentScan("com.apress.springrecipes.court")
 public class CourtConfiguration {
-
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
-
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
-
 }
 ```
 
