@@ -18,6 +18,7 @@ elastic search 는 Elasticsearch B.V. 에서 개발중인 오픈소스 프로젝
 
 엘라스틱 서치는 인덱스, 타입, 문서, 필드 구조로 구성된다. RDBS 에서의 스키마, 테이블 구조와는 다른 문서 방식의 구조로 형성되어 있다.
 엘라스틱 서치와 RDBMS의 구조를 비교 하면 아래의 테이블과 비슷하게 생각할 수 있다.
+
 |엘라스틱서치|RDBMS|
 |-|-|
 |인덱스(index)|데이터베이스|
@@ -318,8 +319,220 @@ POST /customer/_doc
 ```
 ### 검색 API
 
-### 집계 API
+검색 API 사용방식은 두가지가 존재한다.
+- HTTP URI 형태의 파라미터를 추가해 검색하는 방법.
+- RESTful API 방식인 Query DSL을 사용해 request body에 추가해 요청하는 방법.
 
+검색 실습을 위해 엘라스틱서치 공식 레퍼런스에서 제공하는 더미 데이터를 bulk API를 이용하여 입력해 보았다.
+```
+curl -H "Content-Type: application/json" -XPOST "localhost:9200/bank/_bulk?pretty&refresh" --data-binary "@/Users/shabre/Downloads/accounts.json"
+
+curl "localhost:9200/_cat/indices?v"
+>>>
+health status index                    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   bank                     LrOXnLvERUSPM1AFXZouQg   1   1       1000            0    414.2kb        414.2kb
+green  open   .kibana_task_manager_1   M8qPWIC-Sh2j11Gc9u8UZg   1   0          2            0     12.5kb         12.5kb
+green  open   .apm-agent-configuration UEPZ1IcDSHyHa40y7Z43Gg   1   0          0            0       283b           283b
+green  open   .kibana_1                wc7Nd7NxT0OS7cjIvw6nDw   1   0          9            0       32kb           32kb
+yellow open   customer                 nBgWIm5gR_q1Wi6AcdhRdw   3   2          6            0     12.5kb         12.5kb
+```
+
+bank 인덱스에 1000개의 데이터가 정상 입력된것을 확인할 수 있었다.
+
+#### HTTP URI 검색
+age = 30 인 회원을 검색해 보았다. 그 결과 47개의 결과를 얻어낼 수 있었다.
+```json
+GET /bank/_search?q=age:30&pretty=true
+
+{
+  "took" : 22,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 47,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+  ...
+  }
+}
+```
+
+#### request body 방식 질의
+교재에서는 필드 검색을 term으로 검색을 하고, 공식 레퍼런스에선 match로 검색을 하여서 둘의 차이가 뭔지 살펴보니 공식 레퍼런스에서 다음과 같은 설명이 있었다.
+
+```
+Term-level queries
+You can use term-level queries to find documents based on precise values in structured data. Examples of structured data include date ranges, IP addresses, prices, or product IDs.
+```
+
+bank 인덱스의 매핑을 따로 설정하지 않고 bulk입력을 진행하였더니 모든 타입 정보가 text로 설정이 되어버렸다. 따라서 term 으로 검색을 할 경우 필드명을 gender.keyword로 설정하면 match 에서 gender로 검색한 결과와 동일하게 나오게 된다.
+데이터 검색에 여러가지 옵션이 있는데, 이것은 교재 4장 데이터 검색을 공부할때 제대로 알아보려고 한다.
+
+```json
+POST /bank/_search
+{
+  "query": {
+    "match": {
+      "gender": "M"
+    }
+  }
+}
+
+>>>
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 507,
+      "relation" : "eq"
+    },
+    "max_score" : 0.67925805,
+    ...
+  }
+}
+```
+
+### 집계 API
+아래 집계 쿼리에 대해 설명을 하면, state기준으로 group by 를 진행한다.
+그렇게 되면 group by된 데이터들이 buckets에 담겨 출력되게 된다.
+
+이때 쿼리를 자세히 보면 aggs 안에 aggs가 중첩으로 되어있는데, 이것은 group by된 한 bucket의 average를 집계하는 쿼리이다.
+이처럼 집계 쿼리를 중첩적으로 두어 버킷 안에 버킷을 두는 것이 가능하다.
+
+```json
+GET /bank/_search
+{
+  "size": 0,
+  "aggs": {
+    "group_by_state": {
+      "terms": {
+        "field": "state.keyword",
+        "order": {
+          "average_balance": "desc"
+        }
+      },
+      "aggs": {
+        "average_balance": {
+          "avg": {
+            "field": "balance"
+          }
+        }
+      }
+    }
+  }
+}
+>>>
+{
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1000,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "group_by_state" : {
+      "doc_count_error_upper_bound" : 0,
+      "sum_other_doc_count" : 743,
+      "buckets" : [
+        {
+          "key" : "TX",
+          "doc_count" : 30,
+          "average_balance" : {
+            "value" : 26073.3
+          }
+        },
+        {
+          "key" : "MD",
+          "doc_count" : 28,
+          "average_balance" : {
+            "value" : 26161.535714285714
+          }
+        },
+        {
+          "key" : "ID",
+          "doc_count" : 27,
+          "average_balance" : {
+            "value" : 24368.777777777777
+          }
+        },
+        {
+          "key" : "AL",
+          "doc_count" : 25,
+          "average_balance" : {
+            "value" : 25739.56
+          }
+        },
+        {
+          "key" : "ME",
+          "doc_count" : 25,
+          "average_balance" : {
+            "value" : 21663.0
+          }
+        },
+        {
+          "key" : "TN",
+          "doc_count" : 25,
+          "average_balance" : {
+            "value" : 28365.4
+          }
+        },
+        {
+          "key" : "WY",
+          "doc_count" : 25,
+          "average_balance" : {
+            "value" : 21731.52
+          }
+        },
+        {
+          "key" : "DC",
+          "doc_count" : 24,
+          "average_balance" : {
+            "value" : 23180.583333333332
+          }
+        },
+        {
+          "key" : "MA",
+          "doc_count" : 24,
+          "average_balance" : {
+            "value" : 29600.333333333332
+          }
+        },
+        {
+          "key" : "ND",
+          "doc_count" : 24,
+          "average_balance" : {
+            "value" : 26577.333333333332
+          }
+        }
+      ]
+    }
+  }
+}
+```
 
 ### 스키마리스
 엘라스틱 서치는 사용 편의성을 위해 스키마리스 기능을 제공한다. 스키마리스란 인덱스를 생성하는 과정 업이 문서가 추가되어도 문서가 인덱싱 되도록 하는 기능이다. 하지만 스키마리스 기능은 데이터 필드가 자동으로 정의되기 때문에 검색이 원하는 대로 작동하지 않을 가능성이 있고, 이는 검색 품질의 저하로 이어지게 된다. 따라서 특수한 경우가 아니면 스키마리스 기능은 사용하지 않는것이 좋다.
