@@ -172,3 +172,128 @@ POST movie_search,movie_auto/_search
 
 #### boost 설정
 검색을 여러 필드에서 진행할 경우, 특정 필드명에 `^n` 을 덧붙여 가중치를 설정해줄 수 있다.
+
+### Query DSL의 주요 쿼리
+
+#### Match All Query
+
+match_all 파라미터를 사용하는 Match all query는 색인에 모든 문서를 검색하는 쿼리이다. 가장 단순한 쿼리로서 일반적으로 색인에 저장된 문서를 확인할 때 사용한다.
+```json
+POST movie/_search
+{
+  "query":{
+    "match_all":{}
+  }
+}
+```
+
+#### Match Query
+
+Match Query는 텍스트, 숫자 날짜 등이 포함된 문장을 형태소 분석을 통해 Term으로 분리한 후 이 Term들을 이용해 검색 질의를 수행한다. 그러므로 검색어가 분석되어야 할 경우에 사용해야 한다.
+
+```json
+POST movie/_search
+{
+  "query":{
+    "match": {
+      "movieNm":"겨울 왕국"
+    }
+  }
+}
+```
+
+#### Multi Match Query
+
+multi_match 파라미터를 이용하여 Multi Match Query를 할 수 있다. 단일 필드가 아닌 여러개의 필드를 대상으로 검색할 때 사용한다.
+```json
+POST movie/_search
+{
+  "query":{
+    "multi_match": {
+      "query":"겨울 왕국",
+      "fields":["movieNm", "movieNmEn"]
+    }
+  }
+}
+```
+
+#### Term Query
+
+Term Query는 별도의 분석 작업을 수행하지 않고 입력된 텍스트가 존재하는 문서를 찾는다. 따라서 keyword 데이터 타입을 사용하는 필드를 검색하려면 Term Query를 사용해야 한다.
+
+
+```json
+POST movie/_search
+{
+  "query":{
+    "term": {
+      "genre":"애니메이션"
+    }
+  }
+}
+```
+
+#### Bool Query
+
+엘라스틱서치에서는 하나의 쿼리나 여러개의 쿼리를 조합해서 더 높은 스코어를 가진 쿼리 조건으로 검색을 수행할 수 있다.
+```json
+{
+  "query":{
+    "bool": {
+      "must": [], //반드시 조건에 만족되는 문서만 검색된다.
+      "must_not" : [], //조건을 만족하지 않는 문서가 검색된다.
+      "should": [], //여러 조건 중 하나 이상을 만족하는 문서가 검색된다.
+      "filter": [] //조건을 포함하고 있는 문서를 출력한다. 해당 파라미터를 사용하면 스코어별로 정렬되지는 않는다.
+    }
+  }
+}
+```
+
+이 bool query를 이용하여 복잡한 조건의 쿼리를 가능하게 한다.
+
+#### Prefix Query
+
+해당 접두어가 있는 모든 문서를 검색하는데 사용된다. 아래와 같이 prefix로 쿼리를 수행하면 겨울 단어로 시작되는 데이터를 찾아준다.
+```json
+POST movie/_search
+{
+  "query":{
+    "prefix": {
+      "movieNm":"겨울"
+    }
+  }
+}
+```
+
+#### Exist Query
+필드 값의 존재 여부를 쿼리로 사용할 수 있다. 아래와 같은 쿼리를 사용하면, movieNm 값이 null이 아닌 문서만 가져오게 된다.
+```json
+POST movie/_search
+{
+  "query":{
+    "exist": {
+      "field":"movieNm"
+    }
+  }
+}
+```
+
+#### Wildcard query
+검색어가 wildcard와 일치하는 구문을 찾는다.
+와일드카드 옵션은 아래 두가지가 있다.
+- *: 문자의 길이와 상관없이 와일드카드와 일치하는 모든 문서를 찾는다.
+- ?: 지정된 위치의 한 글자가 다른 경우의 문서를 찾는다.
+```json
+POST movie/_search
+{
+  "query":{
+    "wildcard": {
+      "typeNm":"장?" //장편, 장르 ...
+    }
+  }
+}
+```
+
+#### Nested Query
+
+SQL 에서의 Join과 유사한 기능을 수행한다. 데이터 모델링(1) 마지막에서 설명한 Nested 데이터 타입의 필드를 검색할 때 사용된다.
