@@ -297,3 +297,87 @@ POST movie/_search
 #### Nested Query
 
 SQL 에서의 Join과 유사한 기능을 수행한다. 데이터 모델링(1) 마지막에서 설명한 Nested 데이터 타입의 필드를 검색할 때 사용된다.
+
+### 효율적인 검색을 위한 환경설정
+
+#### 동적 분배 방식의 샤드 선택
+
+기본값으로 검색요청의 적절한 분배를 위해 라운드로빈 방식의 알고리즘을 사용하여 샤드를 분배한다. 라운드로빈 외에 동적 분배 방식도 존재하는데, 검색 요청의 응답시간, 검색 요청을 수행하는 스레드 풀의 크기 등을 고려해 최적의 샤드를 동적으로 결정하는 방식이다.
+```
+PUT _cluster/settings
+{
+	"transient": {
+    	"cluster.routing.use_adaptive_replica_selection": true
+	}
+}
+```
+
+### 글로벌 타임아웃
+
+기본값으로 무제한이 설정되어 있으나, 무거운 쿼리가 반복적으로 올 경우 시스템에 부하가 생길 수 있기 때문에 적절한 글로벌 타임아웃을 설정하는것은 중요하다.
+```
+PUT _cluster/settings
+{
+	"transient": {
+    	"search.default_search_timeout": "1s"
+	}
+}
+```
+
+### Search shards API
+
+search shards API 를 이용하면 검색이 수행되는 노드 및 샤드에 대한 정보를 확인할 수 있다. 이 정보는 질의를 최적화하거나 질의가 정상적으로 수행되지 않을 때 문제를 해결하는 데 활용될 수 있다.
+
+
+### Multi search API
+
+여러 건의 검색 요청을 통합해서 한번에 요청하고 한번에 결과를 종합해서 받을 때 사용되는 API 이다.
+```
+POST _msearch
+{"index" : "movie_auto"}
+{"query" : {"match_all" : {}}, "from" : 0, "size": 10}
+{"index" : "movie_search"}
+{"query" : {"match_all" : {}}, "from" : 0, "size" : 10}
+```
+
+### Count API
+
+검색된 문서의 갯수만 알고 싶을 때 사용할 수 있다.
+```
+POST movie_search/_count
+{
+  "query": {
+    "query_string": {
+      "default_field": "prdtYear",
+      "query": "2017"
+    }
+  }
+}
+```
+
+### Validate API
+쿼리를 실행하기에 앞서 쿼리가 유효하게 작성되었는지 검증하는 것이 가능하다. 쿼리가 정상적이라면 "valid" 값에 true 가, 거짓이라면 false가 반환된다.
+
+rewrite=true 파라미터를 추가적으로 주게 되면 왜 오류가 발생하였는지에 대한 정보도 반환해준다.
+```
+POST movie_search/_validate/query?q=prdtYear:2017
+{}
+
+{
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "valid" : true //쿼리가 잘못되었으면 false 반환
+}
+```
+
+### Explain API
+
+검색 결과가 _score 값을 통해 순서대로 반환되었을 것이다. explain API 를 이용하면 어떤 이유로 _score가 계산이 되었는지 상세히 알 수 있다. 특정 문서가 검색되지 않을 때 디버깅 정보로 사용될 수 있다.
+
+### Profile API
+
+쿼리에 대한 상세한 수행 계획과 각 수행 계획별로 수행된 시간을 돌려주므로 성능을 튜닝하거나 디버깅할 때 유용하게 사용될 수 있다. 내 질의를 수행하는 과정에서 각 샤드별로 얼마나 많은 시간이 소요되었는지를 알 수 있다. 쿼리에 대한 내용을 상세하게 설명하므로 결과가 매우 방대하다.
+
