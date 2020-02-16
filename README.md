@@ -1,144 +1,113 @@
-# Hydeout
+<h1 align="center">
+  <br>
+  <img src="/images/reverie-text.png" alt="Reverie" width="200"/>
+  <br>
+  <p align="center">
+  <a href="https://ko-fi.com/Y8Y2QC9Y"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="Ko-fi" width="200"/></a>
+  </p>
+</h1>
 
-Hydeout updates the original [Hyde](https://github.com/poole/hyde)
-theme for [Jekyll](http://jekyllrb.com) 3.x and adds new functionality.
+Reverie is a [Jekyll](https://jekyllrb.com/)-powered theme which is simple and opinionated. It's actually a fork of [jekyll-now](https://github.com/barryclark/jekyll-now) with some additional features and personal touches which I've implemented to suit my needs for my blog.
 
-![Desktop](/_screenshots/1.png?raw=true)
-<img alt="Mobile home page" src="/_screenshots/2.png?raw=true" width="300px" />
-<img alt="Mobile post page" src="/_screenshots/3.png?raw=true" width="300px" />
+> [Theme demo](https://www.amitmerchant.com/reverie/introducing-reverie-jekyll-theme/)
 
-### Usage
+This is a plug-and-play Jekyll theme best suited to use on [GitHub Pages](https://pages.github.com) without even setting up a local environment.
 
-Hydeout is available as the `jekyll-theme-hydeout` Ruby Gem.
-Add `gem "jekyll-theme-hydeout", "~> 3.4"` to your Gemfile and run
-`bundle install`.
+![](/images/reverie-demo.png)
 
-Hydeout uses pagination, so if you have an `index.md`, you'll need to swap
-it with an `index.html` that uses the `index` layout:
+|  Responsiveness            |  Search | Categories |
+|---------------------|----------------------|----------------------|
+|![Responsiveness](/images/mobile-demo.png) | ![search](/images/search.png) | ![categories](/images/categories.png) |
 
+## Features overview
+
+- Clean and minimal design
+- Single column post layout
+- Command-line free fork-first workflow, using GitHub.com to create, customize and post to your blog
+- Fully responsive and mobile optimized theme
+- Sass/Coffeescript support using Jekyll 2.0
+- Free hosting on your GitHub Pages user site
+- All the SEO goodies come built-in
+- Markdown blogging
+- Supports [Pullquotes](https://en.wikipedia.org/wiki/Pull_quote)
+- Syntax highlighting using Pygments
+    - [Dracula syntax theme](https://draculatheme.com/) included
+- Disqus commenting
+- Social media icons
+- Google Analytics integration
+- Fuzzy search across blog posts
+- Blog with pagination
+- Categorize posts out-of-the box
+- RSS Feed
+- Built-in sitemap
+
+> <p><i>Like this theme?</i> Become a patreon to support my open source work <p>
+> <a href="https://www.patreon.com/amitmerchant"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
+
+## Using Reverie on GitHub Pages
+
+### 1. Fork Reverie to your User Repository
+
+Fork this repository, then rename the repository to `yourgithubusername.github.io`.
+
+Alternatively, you can click the [`Use this template`](https://github.com/amitmerchant1990/reverie/generate) button if you want to create a repository with a clean commit history which will use Reverie as a template.
+
+Your Jekyll blog will often be viewable immediately at <https://yourgithubusername.github.io> (if it's not, you can often force it to build by completing step 2).
+
+### 2. Customize and view your site
+
+Enter your site name, description, avatar and many other options by editing the `_config.yml` file. You can easily turn on Google Analytics tracking, Disqus commenting and social icons here.
+
+Making a change to `_config.yml` (or any file in your repository) will force GitHub Pages to rebuild your site with Jekyll. Your rebuilt site will be viewable a few seconds later at <https://yourgithubusername.github.io> - if not, give it ten minutes as GitHub suggests and it'll appear soon.
+
+### 3. Publish your first blog post
+
+Create a new file called `/_posts/2019-2-13-Hello-World.md` to publish your first blog post. That's all you need to do to publish your first blog post! This [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) might come in handy while writing the posts.
+
+> You can add additional posts in the browser on GitHub.com too! Just hit the <kbd>Create new file</kbd> button in `/_posts/` to create new content. Just make sure to include the [front-matter](http://jekyllrb.com/docs/frontmatter/) block at the top of each new blog post and make sure the post's filename is in this format: year-month-day-title.md
+
+## Using Categories in Reverie
+
+You can categorize your content based on `categories` in Reverie. For this, you just need to add `categories` in front matter like below:
+
+For adding single category:
+
+```md
+categories: JavaScript
 ```
----
-layout: index
-title: Home
----
+
+For adding multiple categories:
+
+```md
+categories: [PHP, Laravel]
 ```
 
-### Keep It Simple
+The categorized content can be shown over this URL: <https://yourgithubusername.github.io/categories/>
 
-In keeping with the original Hyde theme, Hydeout aims to keep the overall
-design lightweight and plugin-free. JavaScript is currently limited only
-to Disqus and Google Analytics (and is only loaded if you provide configuration
-variables).
+## Pagination
 
-Hydeout makes heavy use of Flexbox in its CSS. If Flexbox is not available,
-the CSS degrades into a single column layout.
+Pagination of posts in Reverie works out-of-the-box. You only need to specify the number of posts you want on a single page in `_config.yml` and Reverie will take care of the rest.
 
-### Customization
-
-Hydeout replaces Hyde's class-based theming with the use
-of the following SASS variables:
-
-```scss
-$sidebar-bg-color: #202020 !default;
-$sidebar-sticky: true !default;
-$layout-reverse: false !default;
-$link-color: #268bd2 !default;
+```yml
+paginate: 6
 ```
 
-To override these variables, create your own `assets/css/main.scss` file.
-Define your own variables, then import in Hydeout's SCSS, like so:
+## RSS
 
-```scss
----
-# Jekyll needs front matter for SCSS files
----
+The generated [RSS feed](https://en.wikipedia.org/wiki/RSS) of your blog can be found at <https://yourgithubusername.github.io/feed>. You can see the example RSS feed over [here](https://www.amitmerchant.com/reverie/feed.xml).
 
-$sidebar-bg-color: #ac4142;
-$link-color: #ac4142;
-$sidebar-sticky: false;
-@import "hydeout";
-```
+## Sitemap
 
-See the [_variables](_sass/hydeout/_variables.scss) file for other variables
-you can override.
+The generated sitemap of your blog can be found at <https://yourgithubusername.github.io/sitemap>. You can see the example sitemap feed over [here](https://www.amitmerchant.com/reverie/sitemap).
 
-You can see the full set of partials you can replace in the
-[`_includes`](_includes) folder, but there are a few worth noting:
+## Emailware
+Reverie is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this theme or it has helped you in any way, I'd like you send me an email at <bullredeyes@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
-* `_includes/copyright.html` - Insert your own copyright here.
+## The name?
 
-* `_includes/custom-head.html` - Insert custom head tags (e.g. to load your
-  own stylesheets)
+reverie - _a state of being pleasantly lost in one's thoughts; a daydream._<br><sup>/ˈrɛv(ə)ri/</sup> 
 
-* `_includes/custom-foot.html` - Insert custom elements at the end of the
-  body (e.g. for custom JS)
 
-* `_includes/custom-nav-links.html` - Additional nav links to insert at the
-  end of the list of links in the sidebar.
+## License
 
-  Pro-tip: The `nav`s in the sidebar are flexboxes. Use the `order` property
-  to order your links.
-
-* `_includes/custom-icon-links.html`- Additional icon links to insert at the
-  end of the icon links at the bottom of the sidebar. You can use the `order`
-  property to re-order.
-
-* `_includes/favicons.html` - Replace references to `favicon.ico` and
-  `favicon.png` with your own favicons references.
-
-* `_includes/font-includes.html` - The Abril Fatface font used for the site
-  title is loaded here. If you're overriding that font in the CSS, be sure
-  to also remove the font load reference here.
-
-### New Features
-
-* Hydeout adds a new tags page (accessible in the sidebar). Just create a
-  new page with the tags layout:
-
-  ```
-  ---
-  layout: tags
-  title: Tags
-  ---
-  ```
-
-* Hydeout adds a new "category" layout for dedicated category pages.
-  Category pages are automatically added to the sidebar. All other pages
-  must have `sidebar_link: true` in their front matter to show up in
-  the sidebar. To create a category page, use the `category` layout"
-
-  ```
-  ---
-  layout: category
-  title: My Category
-  ---
-
-  Description of "My Category"
-  ```
-
-* A simple redirect-to-Google search is available. Just create a page with
-  the `search` layout.
-
-  ```
-  ---
-  layout: search
-  title: Google Search
-  ---
-  ```
-
-* Disqus integration is ready out of the box. Just add the following to
-  your config file:
-
-  ```yaml
-  disqus:
-    shortname: my-disqus-shortname
-  ```
-
-  If you don't want Disqus or want to use something else, override
-  `comments.html`.
-
-* For Google Analytics support, define a `google_analytics` variable with
-  your property ID in your config file.
-
-There's also a bunch of minor tweaks and adjustments throughout the
-theme. Hope this works for you!
+MIT
