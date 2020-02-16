@@ -1,4 +1,4 @@
 ---
-layout: category
+layout: page
 title: Spring Study
 ---

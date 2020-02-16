@@ -1,4 +1,4 @@
 ---
-layout: category
+layout: page
 title: elastic search
 ---
