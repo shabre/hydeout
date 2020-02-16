@@ -1,8 +1,7 @@
 ---
 layout: post
 title: elastic search 시작
-categories:
-    - elastic search
+categories: elastic search
 excerpt_separator: "<!--more-->"
 ---
 ## elastic search 란?

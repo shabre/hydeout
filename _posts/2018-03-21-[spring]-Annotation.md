@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "[spring] Annotation"
-categories:
-    - Development
+categories: Development
 excerpt_separator: "<!--more-->"
 ---
 
