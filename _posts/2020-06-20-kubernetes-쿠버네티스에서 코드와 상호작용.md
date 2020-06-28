@@ -294,7 +294,8 @@ http://192.168.64.2:30165
 
 아래와 같이 커맨드를 실행할 경우 기본값으로 브라우저 창을 실행하는 유용한 옵션을 제공한다.
 
-```minikube service flask
+```
+minikube service flask
 Shabreui-MacBook-Pro:kfd-flask shabre$ minikube service flask
 |-----------|-------|-------------|---------------------------|
 | NAMESPACE | NAME  | TARGET PORT |            URL            |
