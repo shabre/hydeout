@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "[Spring Study] 스프링 REST"
-categories:
-    - Spring Study
+categories: Spring Study
 excerpt_separator: "<!--more-->"
 ---
 

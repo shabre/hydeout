@@ -1,8 +1,7 @@
 ---
 layout: post
 title: elastic search 데이터 모델링
-categories:
-    - elastic search
+categories: elastic search
 excerpt_separator: "<!--more-->"
 ---
 # 매핑 API 이해하기

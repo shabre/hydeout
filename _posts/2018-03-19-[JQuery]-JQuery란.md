@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "[JQuery] JQuery란?"
-categories:
-    - Development
+categories: Development
 excerpt_separator: "<!--more-->"
 ---
 

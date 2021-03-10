@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "[spring] Aop"
-categories:
-    - Development
+categories: Development
 excerpt_separator: "<!--more-->"
 ---
 
