@@ -45,7 +45,7 @@ fun main() {
 6. coroutineScope 내부의 코루틴이 종료되지 않아 종료될때까지 기다린다. delay(500L) 이 끝나면 `Task from nested launch` 를 출력 후 스코프를 종료한다.
 7. 마지막으로 `Coroutine scope is over` 이 출력되면서 코루틴 스코프가 종료된다.
 
-1.
+
 ```kt
 fun main() = runBlocking { // 코루틴 스코프
     launch { //코루틴 실행
