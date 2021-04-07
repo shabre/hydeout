@@ -1,4 +1,4 @@
 ---
 layout: page
-title: Spring Study
+title: Spring-study
 ---

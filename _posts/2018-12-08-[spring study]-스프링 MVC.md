@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Spring Study] 스프링 MVC"
-categories: Spring Study
+categories: Spring-study
 excerpt_separator: "<!--more-->"
 ---
 
@@ -16,7 +16,7 @@ server + applet??
 
 ### HTTP Servlet 동작방식
 
-![POJO_IoC]({{ site.baseurl }}/assets/image/httpservlet.PNG)
+![POJO_IoC]({{ site.baseurl }}/images/httpservlet.PNG)
 
 1. 사용자(클라이언트)가 URL을 클릭하면 HTTP Request를 Servlet Conatiner로 전송합니다.
 2. HTTP Request를 전송받은 Servlet Container는 HttpServletRequest, HttpServletResponse 두 객체를 생성합니다.
