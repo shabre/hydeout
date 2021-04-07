@@ -1,7 +1,7 @@
 ---
 layout: post
 title: elastic search 시작
-categories: elastic search
+categories: Elastic-search
 excerpt_separator: "<!--more-->"
 ---
 ## elastic search 란?
@@ -81,7 +81,7 @@ kibana는 엘라스틱 서치를 시각화 시켜주고, 개발을 용이하게 
 
 키바나에는 여러 기능이 존재하지만, 연습을 편하게 해줄 RESTFul API 호출 콘솔을 사용 가능하다. 왼쪽 탭의 아래서 세번째 스패너 모양의 아이콘을 클릭하면 사용 가능하다.
 
-![kibana]({{ site.baseurl }}/assets/image/kibana_install.PNG)
+![kibana]({{ site.baseurl }}/images/kibana_install.PNG)
 
 ## 주요 API
 

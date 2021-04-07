@@ -2,7 +2,7 @@
 layout: post
 title: "[part 2] Exemplar Performance
 Testing Approaches"
-categories: Performance testing
+categories: Performance-testing
 excerpt_separator: "<!--more-->"
 ---
 

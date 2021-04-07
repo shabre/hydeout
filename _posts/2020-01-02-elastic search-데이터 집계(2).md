@@ -1,7 +1,7 @@
 ---
 layout: post
 title: elastic search 데이터 집계(2)
-categories: elastic search
+categories: Elastic-search
 excerpt_separator: "<!--more-->"
 ---
 

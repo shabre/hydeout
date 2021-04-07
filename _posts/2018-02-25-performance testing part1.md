@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[part 1 ch1,2] Introduction to Performance Testing"
-categories: Performance testing
+categories: Performance-testing
 excerpt_separator: "<!--more-->"
 ---
 

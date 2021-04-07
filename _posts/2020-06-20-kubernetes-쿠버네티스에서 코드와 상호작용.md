@@ -1,7 +1,7 @@
 ---
 layout: post
 title: kubernetes 에서 코드와 상호작용
-categories: kubernetes
+categories: Kubernetes
 excerpt_separator: "<!--more-->"
 ---
 

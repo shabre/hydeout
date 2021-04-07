@@ -2,7 +2,7 @@
 layout: post
 title: kotlin coroutine
 categories:
-    - kotlin
+    - Kotlin
 excerpt_separator: "<!--more-->"
 ---
 
@@ -19,7 +19,7 @@ co(협력) + routine(루틴) 을 합친 뜻으로 코틀린 공식 라이브러�
 아래 코드는 코루틴을 간단히 동작시킨 코드이다.
 GlobalScope.launch 로 선언된 코루틴이 신규 코루틴을 전역스코프에 생성되었다. delay 를 통해 지연이 발생하면 코루틴은 해당 상태를 잠시 걸어(suspend)두고 스코프를 빠져나와서 다음 명령을 수행하게 된다.
 
-```kt
+```kotlin
 fun main() {
     GlobalScope.launch { // 전역스코프에서 신규 코루틴 생성
         delay(1000L)
@@ -46,7 +46,7 @@ fun main() {
 7. 마지막으로 `Coroutine scope is over` 이 출력되면서 코루틴 스코프가 종료된다.
 
 
-```kt
+```kotlin
 fun main() = runBlocking { // 코루틴 스코프
     launch { //코루틴 실행
         delay(200L)

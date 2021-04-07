@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Spring Study] 스프링 비동기"
-categories: Spring Study
+categories: Spring-study
 excerpt_separator: "<!--more-->"
 ---
 

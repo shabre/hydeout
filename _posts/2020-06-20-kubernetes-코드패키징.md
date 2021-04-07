@@ -1,7 +1,7 @@
 ---
 layout: post
 title: kubernetes 코드 패키징
-categories: kubernetes
+categories: Kubernetes
 excerpt_separator: "<!--more-->"
 ---
 

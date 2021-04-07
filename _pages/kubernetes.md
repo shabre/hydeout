@@ -1,5 +1,5 @@
 ---
 layout: page
-title: kubernetes
+title: Kubernetes
 permalink: /kubernetes/
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: elastic search 클라이언트
-categories: elastic search
+categories: Elastic-search
 excerpt_separator: "<!--more-->"
 ---
 
