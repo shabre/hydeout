@@ -28,6 +28,6 @@ Github 에서 매번 PR(pull request)을 올릴 때마다 저는 리뷰어를 �
 
 이제 아래 그림처럼 자동으로 리뷰어가 설정됩니다.
 
-![image.png](({{ site.baseurl }}/images/reviewer.png)
+![image.png]({{ site.baseurl }}/images/reviewer.png)
 
 원문: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
